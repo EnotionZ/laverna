@@ -103,7 +103,9 @@ define([
         },
 
         editNote: function() {
-            Radio.request('uri', 'navigate', this.ui.editBtn.attr('href'));
+            if(this.ui.editBtn) {
+                Radio.request('uri', 'navigate', this.ui.editBtn.attr('href'));
+            }
         },
 
         rmNote: function() {

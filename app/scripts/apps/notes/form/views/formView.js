@@ -103,14 +103,19 @@ define([
 
         bindKeys: function() {
             Mousetrap.bindGlobal(['ctrl+s', 'command+s'], this.save);
-            Mousetrap.bindGlobal(['esc'], this.cancel);
+            Mousetrap.bindGlobal(['shift+esc'], this.cancel);
         },
 
         onRendered: function() {
             Radio.trigger('notesForm', 'view:ready');
 
-            // Focus on the 'title'
-            this.ui.title.trigger('focus');
+            if(!this.model.get('title')) {
+                // Focus on the 'title' only if empty
+                this.ui.title.trigger('focus');
+            } else {
+                // Otherwise focus editor
+                Radio.trigger('editor', 'focus');
+            }
 
             // Change edit mode
             if (this.configs.editMode !== 'normal') {
